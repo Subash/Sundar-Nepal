@@ -20,7 +20,7 @@
 }
 
 .ImageBox__image img {
-  max-width: calc(100% - 40px);
+  max-width: 100%;
 }
 
 .footer-info {
