@@ -136,7 +136,7 @@ class ImageBox extends Component {
     return (
       <div className="ImageBox">
         <div className="ImageBox__image">
-          <img src={this.props.src} width="500" height="500"/>
+          <img src={this.props.src} width="500" height="auto"/>
         </div>
         <div className="ImageBox__inner">{this.props.children}</div>
       </div>
