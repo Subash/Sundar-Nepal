@@ -3,8 +3,9 @@
 
 .ImageBox {
   position: relative;
-  width: 500px;
-  margin: 20px auto;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
 }
 
 .ImageBox__inner {
@@ -26,6 +27,7 @@
 .social {
   text-align: center;
   max-width: 500px;
+  padding: 20px;
   margin: auto;
   margin-top: 20px;
   margin-bottom: 20px;
