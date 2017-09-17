@@ -18,8 +18,6 @@ class App extends Component {
     this.generateImage = this.generateImage.bind(this);
     this.onError = this.onError.bind(this);
     this.onLogin = this.onLogin.bind(this);
-    this.postToFacebook = this.postToFacebook.bind(this);
-    this.requestPublishPermissions = this.requestPublishPermissions.bind(this);
   }
 
   generateImage() {
@@ -46,37 +44,6 @@ class App extends Component {
     console.log(err);
     this.state.error = err.message;
     this.setState(this.state);
-  }
-
-  postToFacebook() {
-    this.requestPublishPermissions()
-    .then(() => {
-      util.postToFacebook({
-        accessToken: this.state.userDetails.accessToken,
-        image: util.dataURItoBlob(this.state.userImageUrl),
-        message: 'Get your pic with Nepalese flag from http://sundar-nepal.subash.me',
-        userID: this.state.userDetails.userID
-      }).then(() => {
-        alert('Posted Successfully');
-      }).catch(this.onError);
-    })
-    .catch(this.onError)
-  }
-
-  requestPublishPermissions() {
-    return new Promise((resolve, reject) => {
-      FB.login((response) => {
-        if (response.authResponse) {
-          this.state.userDetails = {
-            userID : response.authResponse.userID,
-            accessToken: response.authResponse.accessToken
-          };
-          resolve();
-        } else {
-          reject(new Error('Failed to request permission'));
-        }
-      }, { scope: 'publish_actions'});
-    });
   }
 
   onLogin(details) {
