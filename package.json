@@ -3,21 +3,39 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "babel": "^5.0.12",
-    "babel-core": "^5.8.25",
-    "babel-loader": "^5.3.2",
-    "express": "^4.13.3",
-    "forever": "^0.14.1",
-    "react": "^0.13.3",
-    "request": "^2.64.0",
-    "underscore": "~1.7.0",
-    "webpack": "^1.10.1",
-    "whatwg-fetch": "^0.9.0"
-  },
-  "engines": {
-    "node": "0.12.2"
+    "express": "^4.15.4",
+    "request": "^2.81.0"
   },
   "scripts": {
-    "start": "./node_modules/forever/bin/forever server.js"
+    "start": "npm run clean && npm run compile-src && npm run copy && npm run webpack && node lib/server.js",
+    "clean": "npm run clean-lib && npm run clean-public",
+    "compile-src": "babel src --out-dir lib",
+    "clean-lib": "rm -r ./lib || true",
+    "copy-images": "cp -r public/img .public/img",
+    "copy-css": "cp -r public/css .public/css",
+    "copy-html": "cp public/index.html .public/index.html",
+    "copy": "npm run copy-css && npm run copy-html && npm run copy-images",
+    "webpack": "webpack",
+    "clean-public": "(rm -r ./.public || true) && mkdir .public"
+  },
+  "babel": {
+    "plugins": [
+      "transform-es2015-modules-commonjs"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack": "^3.6.0",
+    "whatwg-fetch": "^2.0.3"
   }
 }

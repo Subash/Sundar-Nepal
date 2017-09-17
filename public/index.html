@@ -5,21 +5,23 @@
   <meta name="description" content="नेपाल को झन्डा भएको प्रोफाइल फोटो बनाउनु होस">
   <meta property="og:title" content="सुन्दर नेपाल" />
   <meta property="og:description" content="नेपाल को झन्डा भएको प्रोफाइल फोटो बनाउनु होस् " />
-  <meta property="og:image" content="/default.jpg" />
+  <meta property="og:image" content="/img/default.jpg" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="/css/app.css">
   <script src="https://connect.facebook.net/en_US/all.js"></script>
 </head>
 <body>
   <div id="app"></div>
-  <script src="app.min.js"></script>
+  <script src="/js/app.min.js"></script>
   <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=519129691585992";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
+  <script>
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
 </body>
 </html>

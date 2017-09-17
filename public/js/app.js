@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import 'whatwg-fetch';
 import * as util from './util.js';
-import 'babel/polyfill';
+import 'babel-polyfill';
 
 class App extends Component {
 
@@ -24,8 +25,7 @@ class App extends Component {
   generateImage() {
     this.state.userImageUrl = null;
     this.state.error = false;
-    const profileImageUrl = encodeURIComponent(`https://graph.facebook.com/${this.state.userDetails.userID}/picture?width=800&height=800`);
-    util.mergeImages(`/proxy-image-app-np?url=${profileImageUrl}&rand=${Math.random()}`, 'flag.png')
+    util.mergeImages(`/profile-picture/${this.state.userDetails.userID}?rand=${Math.random()}`, '/img/flag.png')
       .then((image) => {
         this.state.userImageUrl = image;
         this.setState(this.state);
@@ -35,9 +35,10 @@ class App extends Component {
 
   componentWillMount() {
     FB.init({
-      appId      : '519129691585992',
-      xfbml      : true,
-      version    : 'v2.4'
+      appId            : '519129691585992',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.10'
     });
   }
 
@@ -89,7 +90,7 @@ class App extends Component {
     const userImageUrl = this.state.userImageUrl;
     const error = this.state.error;
     const loggedIn = this.state.loggedIn;
-    const defaultImageUrl = 'default.jpg';
+    const defaultImageUrl = '/img/default.jpg';
     let imageBoxContent = null;
 
     if(error) {
@@ -121,9 +122,9 @@ class App extends Component {
         </div>
         <div className="alert alert-info footer-info">
           <ul>
-            <li>Made by, <a href="http://twitter.com/sbspk"><i className="fa fa-twitter"></i> @sbspk</a>, <a href="https://facebook.com/return.undefined"><i className="fa fa-facebook"></i> Subash Pathak</a></li>
+            <li>Made by, <a href="http://twitter.com/sbspk"><i className="fa fa-twitter"></i> @sbspk</a>, <a href="https://facebook.com/sbspk"><i className="fa fa-facebook"></i> Subash Pathak</a></li>
             <li>Tested only in latest version of Chrome and Firefox. </li>
-            <li>Code for this app is available on <a href="https://github.com/Subash/Sundar-Nepal" target="_blank">Github</a> </li>
+            <li>Code for this app is available on <a href="https://github.com/Subash/sundar-nepal.subash.me" target="_blank">Github</a> </li>
           </ul>
         </div>
       </div>
@@ -181,4 +182,4 @@ class Login extends Component {
   }
 }
 
-React.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
