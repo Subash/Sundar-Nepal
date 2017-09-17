@@ -44,24 +44,6 @@ class App {
     ReactDOM.render(<Container userData={this.userData} />, document.getElementById('app'));
   }
 
-  _login() {
-    return new Promise((resolve, reject)=> {
-      FB.getLoginStatus( (response)=> {
-        if(response.status === 'connected') {
-          resolve({ userId: response.authResponse.userID, accessToken: response.authResponse.accessToken });
-        } else {
-          FB.login((response) => {
-            if (response.authResponse) {
-              resolve({ userId: response.authResponse.userID, accessToken: response.authResponse.accessToken });
-            } else {
-              reject(new Error('Unable to login with Facebook'));
-            }
-          });
-        }
-      });
-    });
-  }
-
   showLoading() {
 
   }
@@ -81,6 +63,24 @@ class App {
       this.hideLoading();
       alert(err.message);
     }
+  }
+
+  _login() {
+    return new Promise((resolve, reject)=> {
+      FB.getLoginStatus( (response)=> {
+        if(response.status === 'connected') {
+          resolve({ userId: response.authResponse.userID, accessToken: response.authResponse.accessToken });
+        } else {
+          FB.login((response) => {
+            if (response.authResponse) {
+              resolve({ userId: response.authResponse.userID, accessToken: response.authResponse.accessToken });
+            } else {
+              reject(new Error('Unable to login with Facebook'));
+            }
+          });
+        }
+      });
+    });
   }
 
   initializeSDK() {
