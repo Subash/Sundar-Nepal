@@ -16,15 +16,17 @@ export function createImage(url, { width, height }) {
   });
 }
 
-export function mergeImages(bottomImageUrl, topImageUrl) {
+export function mergeImages(imageUrls, { width, height }) {
   return new Promise((resolve, reject) => {
-    const imageSize = { width: 800, height: 800 };
+    const imageSize = { width, height };
     const canvas = createCanvas(imageSize);
     const ctx = canvas.getContext("2d");
-    Promise.all([createImage(bottomImageUrl, imageSize), createImage(topImageUrl, imageSize)])
-      .then( ([bottomImage, topImage]) => {
-        ctx.drawImage(bottomImage, 0, 0, imageSize.width, imageSize.height);
-        ctx.drawImage(topImage, 0, 0,  imageSize.width, imageSize.height);
+    const images = imageUrls.map(imageUrl => createImage(imageUrl, imageSize));
+    Promise.all(images)
+      .then(images => {
+        for(const image of images) {
+          ctx.drawImage(image, 0, 0, imageSize.width, imageSize.height);
+        }
         resolve(canvas.toDataURL("image/jpeg"));
       }).catch(reject);
   })

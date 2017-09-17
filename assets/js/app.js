@@ -23,7 +23,12 @@ class App extends Component {
   generateImage() {
     this.state.userImageUrl = null;
     this.state.error = false;
-    util.mergeImages(`/profile-picture/${this.state.userDetails.userID}?rand=${Math.random()}`, '/img/flag.png')
+    const imageSize = { width: 800, height:800 };
+    const imageUrls = [
+      `/profile-picture/${this.state.userDetails.userID}?rand=${Math.random()}`,
+      '/img/flag.png'
+    ];
+    util.mergeImages(imageUrls, imageSize)
       .then((image) => {
         this.state.userImageUrl = image;
         this.setState(this.state);
