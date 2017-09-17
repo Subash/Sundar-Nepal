@@ -14,9 +14,9 @@ if(process.env.NODE_ENV === 'production') {
 
 
 module.exports = {
-  entry: './public/js/app.js',
+  entry: './assets/js/app.js',
   output: {
-    filename: './.public/js/app.min.js'
+    filename: './public/js/app.min.js'
   },
   plugins: plugins,
   module: {

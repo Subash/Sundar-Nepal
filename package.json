@@ -11,12 +11,12 @@
     "clean": "npm run clean-lib && npm run clean-public",
     "compile-src": "babel src --out-dir lib",
     "clean-lib": "rm -r ./lib || true",
-    "copy-images": "cp -r public/img .public/img",
-    "copy-css": "cp -r public/css .public/css",
-    "copy-html": "cp public/index.html .public/index.html",
+    "copy-images": "cp -r assets/img public/img",
+    "copy-css": "cp -r assets/css public/css",
+    "copy-html": "cp assets/index.html public/index.html",
     "copy": "npm run copy-css && npm run copy-html && npm run copy-images",
     "webpack": "webpack",
-    "clean-public": "(rm -r ./.public || true) && mkdir .public"
+    "clean-public": "(rm -r ./public || true) && mkdir public"
   },
   "babel": {
     "plugins": [
