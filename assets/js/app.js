@@ -6,7 +6,6 @@ import 'babel-polyfill';
 import Container from './container';
 
 class App {
-
   constructor() {
     this.initializeSDK();
     this.userData = {};
@@ -16,12 +15,12 @@ class App {
   async updateUserData(userData) {
     const regenerateImage = userData.userId && this.userData.userId !== userData.userId;
     this.userData = { ...this.userData, ...userData };
-    if(regenerateImage) await this.generateImage();
+    if (regenerateImage) await this.generateImage();
     this.render();
   }
 
   async generateImage() {
-    const imageSize = { width: 800, height:800 };
+    const imageSize = { width: 800, height: 800 };
     const imageUrls = [
       `/profile-picture/${this.userData.userId}?rand=${Math.random()}`,
       '/img/flag.png'
@@ -31,7 +30,7 @@ class App {
       const image = await util.mergeImages(imageUrls, imageSize);
       this.updateUserData({ image });
     } catch (err) {
-      alert('Failed to create profile picture');
+      alert('Failed to create profile picture. ' + err.message);
     }
   }
 
@@ -41,41 +40,39 @@ class App {
   }
 
   render() {
-    ReactDOM.render(<Container userData={this.userData} />, document.getElementById('app'));
-  }
-
-  showLoading() {
-
-  }
-
-  hideLoading() {
-
+    ReactDOM.render(
+      <Container userData={this.userData} />,
+      document.getElementById('app')
+    );
   }
 
   async login() {
     try {
       this.clearUserData();
       const userData = await this._login();
-      this.showLoading();
       await this.updateUserData(userData);
-      this.hideLoading();
     } catch (err) {
-      this.hideLoading();
       alert(err.message);
     }
   }
 
   _login() {
-    return new Promise((resolve, reject)=> {
-      FB.getLoginStatus( (response)=> {
-        if(response.status === 'connected') {
-          resolve({ userId: response.authResponse.userID, accessToken: response.authResponse.accessToken });
+    return new Promise((resolve, reject) => {
+      FB.getLoginStatus(response => {
+        if (response.status === 'connected') {
+          resolve({
+            userId: response.authResponse.userID,
+            accessToken: response.authResponse.accessToken
+          });
         } else {
-          FB.login((response) => {
+          FB.login(response => {
             if (response.authResponse) {
-              resolve({ userId: response.authResponse.userID, accessToken: response.authResponse.accessToken });
+              resolve({
+                userId: response.authResponse.userID,
+                accessToken: response.authResponse.accessToken
+              });
             } else {
-              reject(new Error('Unable to login with Facebook'));
+              reject(new Error('Failed to login with Facebook'));
             }
           });
         }
@@ -84,7 +81,7 @@ class App {
   }
 
   initializeSDK() {
-    if(!global.FB) return alert('Facebook Not Loaded');
+    if (!global.FB) return alert('Failed to load Facebook SDK. Please temporarily disable tracking and ad blockers.');
     FB.init({
       appId: '519129691585992',
       autoLogAppEvents: true,
