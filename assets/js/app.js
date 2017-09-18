@@ -46,12 +46,23 @@ class App {
     );
   }
 
+  showLoading() {
+    this.updateUserData({ loading: true });
+  }
+
+  hideLoading() {
+    this.updateUserData({ loading: false });
+  }
+
   async login() {
     try {
       this.clearUserData();
+      this.showLoading();
       const userData = await this._login();
       await this.updateUserData(userData);
+      this.hideLoading();
     } catch (err) {
+      this.hideLoading();
       alert(err.message);
     }
   }
