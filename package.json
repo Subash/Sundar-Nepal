@@ -4,10 +4,14 @@
   "private": true,
   "dependencies": {
     "express": "^4.15.4",
+    "forever": "^0.15.3",
     "request": "^2.81.0"
   },
   "scripts": {
-    "start": "npm run clean && npm run compile-src && npm run copy && npm run webpack && node lib/server.js",
+    "start": "forever lib/server.js",
+    "start-dev": "npm run prepare && node lib/server.js",
+    "prepare": "npm run clean && npm run compile-src && npm run copy && npm run webpack",
+    "build": "NODE_ENV=production npm run prepare && docker build -t sundar-nepal .",
     "clean": "npm run clean-lib && npm run clean-public",
     "compile-src": "babel src --out-dir lib",
     "clean-lib": "rm -r ./lib || true",
