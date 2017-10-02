@@ -14,9 +14,8 @@ export default function Footer() {
       </p>
       <p>
         Code for this app is available on
-        <a href="https://github.com/Subash/sundar-nepal.subash.me" target="_blank">
-          Github
-        </a>
+        <i className="fa fa-github" />
+        <a href="https://github.com/Subash/sundar-nepal.subash.me" target="_blank">Github</a>
       </p>
     </div>
   );
