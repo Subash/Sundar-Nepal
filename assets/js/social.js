@@ -5,7 +5,7 @@ export default function() {
     <div className="social">
       <div
         className="fb-like"
-        data-href="https://sundar-nepal.subash.me/"
+        data-href="http://sundar-nepal.subash.me/"
         data-layout="standard"
         data-action="like"
         data-show-faces="false"
