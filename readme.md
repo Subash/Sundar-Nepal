@@ -1,13 +1,11 @@
-### Build (Docker Required)
+### Build
 ```shell
-sh build.sh
-# OR
-docker build -t sundar-nepal .
+npm run build-docker
 ```
 
 ### Run
 ```
-docker run --rm -p 9000:9000 sundar-nepal
+npm run run-docker
 ```
 
 Follow me on Twitter [@sbspk](http://twitter.com/sbspk) or on Facebook [Subash Pathak](http://facebook.com/sbspk)

@@ -32,7 +32,9 @@
     "copy-html": "cp assets/index.html public/index.html",
     "copy": "npm run copy-css && npm run copy-html && npm run copy-images",
     "webpack": "webpack",
-    "clean-public": "(rm -r ./public || true) && mkdir public"
+    "clean-public": "(rm -r ./public || true) && mkdir public",
+    "build-docker": "docker build -t sundar-nepal .",
+    "run-docker": "docker run --rm -p 9000:9000 sundar-nepal"
   },
   "babel": {
     "plugins": [
